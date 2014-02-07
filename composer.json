@@ -1,0 +1,16 @@
+{
+	"name": "jalle19/php-xbmc-mock",
+	"type": "library",
+	"description": "Very rudimentary mock of XBMC's web server",
+	"keywords": ["xbmc", "mock"],
+	"homepage": "https://github.com/Jalle19/php-xbmc-mock",
+	"license": "GPL-2.0",
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"autoload": {
+		"psr-0": {
+			"XBMCMock\\": "src/"
+		}
+	}
+}

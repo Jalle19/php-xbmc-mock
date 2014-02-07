@@ -59,9 +59,26 @@ class JSONRPC implements IHandler
 	}
 
 	/**
-	 * Responds to the Application.GetProperties method
+	 * Encodes and outputs the response to the client (with the correct headers)
+	 * @param string $response the raw JSON-RPC response
 	 */
-	private function ApplicationGetProperties()
+	private function respond($response)
+	{
+		header('Content-Type: application/json');
+		echo json_encode($response);
+	}
+
+	/**
+	 * 
+	 * JSON-RPC method mappings. These should be protected so that people can 
+	 * customize the responses.
+	 * 
+	 */
+
+	/**
+	 * 
+	 */
+	protected function ApplicationGetProperties()
 	{
 		$response = new \stdClass();
 		$response->jsonrpc = '2.0';
@@ -78,16 +95,6 @@ class JSONRPC implements IHandler
 		$response->result = $result;
 
 		$this->respond($response);
-	}
-
-	/**
-	 * Encodes and outputs the response to the client (with the correct headers)
-	 * @param string $response the raw JSON-RPC response
-	 */
-	private function respond($response)
-	{
-		header('Content-Type: application/json');
-		echo json_encode($response);
 	}
 
 }

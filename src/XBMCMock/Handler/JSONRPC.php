@@ -94,6 +94,15 @@ class JSONRPC implements IHandler
 		$response->id = $this->_request->id;
 
 		$this->respond($response);
+	}
+
+	protected function VideoLibraryGetMovies()
+	{
+		$ctrl = new \XBMCMock\Controller\Movie();
+		$movies = $ctrl->getMovies();
+
+		$response = new Response\SuccessResponse($movies);
+		$response->id = $this->_request->id;
 
 		$this->respond($response);
 	}

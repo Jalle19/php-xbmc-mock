@@ -8,7 +8,15 @@
  * @license https://www.gnu.org/licenses/gpl.html The GNU General Public License v2.0
  */
 
-require_once(__DIR__.'/../vendor/autoload.php');
+// Find and include the Composer autoloader
+$vendorDir = __DIR__.'/../vendor';
+if (!file_exists($vendorDir))
+	$vendorDir = __DIR__.'/../../..';
+
+if (file_exists($vendorDir))
+	require_once($vendorDir.'/autoload.php');
+else
+	die('Unable to find the Composer autoloader');
 
 // Start the mock, catching any exceptions so the client can see them
 try

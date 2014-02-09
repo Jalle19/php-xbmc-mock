@@ -23,7 +23,7 @@ class XBMC
 	{
 		if (!isset($_SERVER['PHP_AUTH_USER']) ||
 		    $_SERVER['PHP_AUTH_USER'] !== self::HTTP_USERNAME || 
-			$_SERVER['PHP_AUTH_USER'] !== self::HTTP_PASSWORD)
+			$_SERVER['PHP_AUTH_PW'] !== self::HTTP_PASSWORD)
 		{
 			header('WWW-Authenticate: Basic realm='.self::HTTP_BASIC_REALM);
 			header('HTTP/1.1 401 Unauthorized');

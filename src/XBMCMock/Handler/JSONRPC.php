@@ -2,6 +2,8 @@
 
 namespace XBMCMock\Handler;
 
+use \XBMCMock\JSONRPC\Response as Response;
+
 /**
  * Handles requests to /jsonrpc
  *
@@ -62,7 +64,7 @@ class JSONRPC implements IHandler
 	 * Encodes and outputs the response to the client (with the correct headers)
 	 * @param string $response the raw JSON-RPC response
 	 */
-	private function respond($response)
+	private function respond(Response\Base $response)
 	{
 		header('Content-Type: application/json');
 		echo json_encode($response);
@@ -80,19 +82,18 @@ class JSONRPC implements IHandler
 	 */
 	protected function ApplicationGetProperties()
 	{
-		$response = new \stdClass();
-		$response->jsonrpc = '2.0';
-
 		$version = new \stdClass();
 		$version->major = 13;
 		$version->minor = 0;
 		$version->revision = '20131231-7da2a42';
 		$version->tag = 'prealpha';
+		$properties = new \stdClass();
+		$properties->version = $version;
 
-		$result = new \stdClass();
-		$result->version = $version;
+		$response = new Response\SuccessResponse($properties);
+		$response->id = $this->_request->id;
 
-		$response->result = $result;
+		$this->respond($response);
 
 		$this->respond($response);
 	}
